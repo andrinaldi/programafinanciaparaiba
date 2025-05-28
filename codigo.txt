@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulário de Interesse em Veículo</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            /* Gradiente preto (30% opacidade) sobre a imagem de fundo */
+            background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url('testebg.jpg');
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-position: center;
+            /* filter: brightness(0.85); */ /* Comentado/removido para evitar escurecimento duplo inicialmente */
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            color: #333;
+            box-sizing: border-box;
+        }
+
+        .container {
+            background-color: rgba(255, 255, 255, 0.9);
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            width: 95%;
+            max-width: 400px;
+        }
+
+        h1 {
+            color: #f06400; /* Cor laranja para o título, pode ajustar se o fundo mudar muito */
+            text-align: center;
+            margin-bottom: 25px;
+            font-size: 2em;
+        }
+
+        div.form-group {
+            margin-bottom: 15px;
+        }
+
+        label {
+            display: block;
+            font-size: 1.1em;
+            color: #555;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        input[type="text"],
+        input[type="number"] { /* Mantendo a regra, embora usemos type="text" para moeda */
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1em;
+            box-sizing: border-box;
+        }
+
+        input::placeholder {
+            color: #aaa;
+            opacity: 0.8;
+        }
+
+        button {
+            background-color: #f06400; /* Cor laranja para o botão */
+            color: white;
+            padding: 15px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1.1em;
+            transition: background-color 0.3s ease;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        button:hover {
+            background-color: #e05a00; /* Laranja mais escuro no hover */
+        }
+
+        /* Media Queries permanecem as mesmas */
+        @media (max-width: 600px) {
+            body {
+                padding: 15px;
+            }
+            .container {
+                padding: 20px;
+                border-radius: 8px;
+            }
+            h1 {
+                font-size: 1.8em;
+                margin-bottom: 20px;
+            }
+            label {
+                font-size: 1em;
+            }
+            input[type="text"],
+            input[type="number"] {
+                font-size: 0.9em;
+                padding: 10px;
+            }
+            button {
+                font-size: 1em;
+                padding: 12px;
+                border-radius: 6px;
+            }
+        }
+
+        @media (max-width: 375px) {
+            h1 {
+                font-size: 1.6em;
+            }
+            label {
+                font-size: 0.9em;
+            }
+            input[type="text"],
+            input[type="number"] {
+                font-size: 0.85em;
+            }
+            button {
+                font-size: 0.9em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1><u>Análise de Crédito</u></h1><h1>Tenha o atendimento Exclusivo via WhatsApp:</h1>
+        <form id="formInteresse" onsubmit="enviarWhatsApp(event)">
+            <div class="form-group">
+                <label for="nome">Nome Completo:</label>
+                <input type="text" id="nome" name="nome" required>
+            </div>
+
+            <div class="form-group">
+                <label for="modelo">Marca/Modelo do Veículo:</label>
+                <input type="text" id="modelo" name="modelo" placeholder="Ex: Hyundai HB20" required>
+            </div>
+
+            <div class="form-group">
+                <label for="valor">Valor (R$):</label>
+                <input type="text" id="valor" name="valor" placeholder="Ex: 50.000,00" required>
+            </div>
+
+            <div class="form-group">
+                <label for="entrada">Entrada Desejada (R$):</label>
+                <input type="text" id="entrada" name="entrada" placeholder="Ex: 10.000,00">
+            </div>
+
+            <button type="submit">Enviar para Análise - Whatsapp</button>
+        </form>
+    </div>
+
+    <script>
+        function enviarWhatsApp(event) {
+            event.preventDefault();
+
+            const nomeInput = document.getElementById('nome');
+            const modeloInput = document.getElementById('modelo');
+            const valorInput = document.getElementById('valor');
+            const entradaInput = document.getElementById('entrada');
+            const numeroTelefone = '+5511959145787'; // Seu número de telefone
+
+            const nome = nomeInput.value.trim();
+            const modelo = modeloInput.value.trim();
+            const valorStr = valorInput.value.trim();
+            const entradaStr = entradaInput.value.trim();
+
+            let errorMessages = [];
+
+            if (!nome) {
+                errorMessages.push('Nome Completo é obrigatório.');
+            }
+            if (!modelo) {
+                errorMessages.push('Modelo do Veículo é obrigatório.');
+            }
+            // Validação para o campo Valor (R$)
+            if (!valorStr) { // Verifica se está vazio
+                errorMessages.push('Valor (R$) é obrigatório.');
+            }
+
+
+            function parseCurrencyBR(currencyString) {
+                if (!currencyString) return null; // Retorna null se a string for vazia ou nula
+                // Remove "R$", espaços, e separadores de milhar (.), depois substitui vírgula decimal por ponto.
+                let cleanedString = String(currencyString).replace('R$', '').trim(); // Garante que é string
+                cleanedString = cleanedString.replace(/\./g, ''); // Remove todos os pontos (milhar)
+                cleanedString = cleanedString.replace(',', '.');   // Substitui vírgula decimal por ponto
+
+                const num = parseFloat(cleanedString);
+                if (isNaN(num) || num < 0) {
+                    return NaN; // Retorna NaN se não for um número válido ou for negativo
+                }
+                return num;
+            }
+
+            const valorNum = parseCurrencyBR(valorStr);
+             // Verifica se valorNum é NaN APENAS se valorStr NÃO estiver vazio (para evitar erro em campo obrigatório já tratado)
+            if (valorStr && isNaN(valorNum)) {
+                 errorMessages.push('Valor (R$) deve ser um número válido (Ex: 50.000,00).');
+            }
+
+
+            let entradaNum = null;
+            if (entradaStr) { // Só processa se houver alguma entrada
+                entradaNum = parseCurrencyBR(entradaStr);
+                if (isNaN(entradaNum)) {
+                    errorMessages.push('Entrada Desejada (R$) deve ser um número válido (Ex: 10.000,00).');
+                }
+            }
+
+            if (errorMessages.length > 0) {
+                alert('Por favor, corrija os seguintes erros:\n- ' + errorMessages.join('\n- '));
+                return; // Interrompe a execução se houver erros
+            }
+
+            let mensagem = `Olá, tenho interesse no seguinte veículo:\n\n`;
+            mensagem += `Nome Completo: ${nome}\n`;
+            mensagem += `Modelo do Veículo: ${modelo}\n`;
+            if (valorNum !== null && !isNaN(valorNum)) { // Adicionado !isNaN(valorNum) para segurança
+                mensagem += `Valor: R$${valorNum.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}\n`;
+            }
+
+            if (entradaNum !== null && !isNaN(entradaNum)) { // Adicionado !isNaN(entradaNum) para segurança
+                mensagem += `Entrada Desejada: R$${entradaNum.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}\n`;
+            } else {
+                mensagem += `Entrada Desejada: Não informada\n`;
+            }
+
+            const linkWhatsApp = `https://wa.me/${numeroTelefone}?text=${encodeURIComponent(mensagem)}`;
+            window.open(linkWhatsApp, '_blank');
+        }
+    </script>
+</body>
+</html>

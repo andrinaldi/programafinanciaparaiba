@@ -1,0 +1,85 @@
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #f06400, #ff8c00); /* Gradiente laranja Itaú */
+    margin: 0;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    color: #333; /* Cor do texto padrão */
+}
+
+.container {
+    background-color: rgba(255, 255, 255, 0.9); /* Fundo branco semi-transparente para o formulário */
+    padding: 40px;
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    width: 90%;
+    max-width: 600px;
+}
+
+h1 {
+    color: #f06400; /* Laranja Itaú para o título */
+    text-align: center;
+    margin-bottom: 30px;
+    font-size: 2.5em; /* Aumentando o tamanho da fonte do título */
+}
+
+div {
+    margin-bottom: 20px;
+}
+
+label {
+    display: block;
+    font-size: 1.2em; /* Aumentando o tamanho da fonte dos rótulos */
+    color: #555;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+input[type="text"],
+input[type="number"] {
+    width: calc(100% - 22px);
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 1.1em; /* Aumentando o tamanho da fonte dos campos de entrada */
+}
+
+button {
+    background-color: #f06400; /* Laranja Itaú para o botão */
+    color: white;
+    padding: 15px 25px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1.3em; /* Aumentando o tamanho da fonte do botão */
+    transition: background-color 0.3s ease;
+    width: 100%;
+}
+
+button:hover {
+    background-color: #e05a00;
+}
+
+/* Estilos para tornar o layout mais agradável em telas menores */
+@media (max-width: 768px) {
+    .container {
+        padding: 20px;
+    }
+
+    h1 {
+        font-size: 2em;
+    }
+
+    label {
+        font-size: 1em;
+    }
+
+    input[type="text"],
+    input[type="number"],
+    button {
+        font-size: 1em;
+    }
+}

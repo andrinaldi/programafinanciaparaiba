@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulário de Interesse em Veículo</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            /* Gradiente preto (30% opacidade) sobre a imagem de fundo */
+            background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url('testebg.jpg'); /* [cite: 2] */
+            background-repeat: no-repeat; /* [cite: 3] */
+            background-size: cover; /* [cite: 3] */
+            background-position: center; /* [cite: 3] */
+            /* filter: brightness(0.85); */ /* Comentado/removido para evitar escurecimento duplo inicialmente */
+            margin: 0; /* [cite: 3] */
+            padding: 20px; /* [cite: 4] */
+            display: flex; /* [cite: 4] */
+            justify-content: center; /* [cite: 4] */
+            align-items: center; /* [cite: 4] */
+            min-height: 100vh; /* [cite: 4] */
+            color: #333; /* [cite: 4] */
+            box-sizing: border-box; /* [cite: 4] */
+        }
+
+        .container {
+            background-color: rgba(255, 255, 255, 0.9); /* [cite: 5] */
+            padding: 30px; /* [cite: 6] */
+            border-radius: 10px; /* [cite: 6] */
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1); /* [cite: 6] */
+            width: 95%; /* [cite: 6] */
+            max-width: 400px; /* [cite: 6] */
+        }
+
+        h1 {
+            color: #f06400; /* [cite: 7] */
+            text-align: center; /* [cite: 8] */
+            font-size: 2em; /* [cite: 9] */
+            /*text-decoration: underline;  Sublinhado aplicado via CSS */
+            margin-bottom: 10px; /* Ajustado para acomodar o h2 */
+        }
+
+        h2 {
+            color: #444; /* Cor um pouco mais suave para o subtítulo */
+            text-align: center;
+            font-size: 1.3em; /* Tamanho adequado para subtítulo */
+            margin-top: 0;
+            margin-bottom: 25px; /* Espaçamento antes do formulário */
+            font-weight: normal; /* Peso normal para não competir com o h1 */
+        }
+
+        div.form-group {
+            margin-bottom: 15px; /* [cite: 9] */
+        }
+
+        label {
+            display: block; /* [cite: 10] */
+            font-size: 1.1em; /* [cite: 11] */
+            color: #555; /* [cite: 11] */
+            margin-bottom: 5px; /* [cite: 11] */
+            font-weight: bold; /* [cite: 11] */
+        }
+
+        input[type="text"],
+        input[type="number"] {
+            width: 100%; /* [cite: 11] */
+            padding: 12px; /* [cite: 12] */
+            border: 1px solid #ddd; /* [cite: 12] */
+            border-radius: 5px; /* [cite: 12] */
+            font-size: 1em; /* [cite: 12] */
+            box-sizing: border-box; /* [cite: 12] */
+        }
+
+        input::placeholder {
+            color: #aaa; /* [cite: 13] */
+            opacity: 0.8; /* [cite: 14] */
+        }
+
+        button {
+            background-color: #f06400; /* [cite: 14] */
+            color: white; /* [cite: 15] */
+            padding: 15px; /* [cite: 16] */
+            border: none; /* [cite: 16] */
+            border-radius: 8px; /* [cite: 16] */
+            cursor: pointer; /* [cite: 16] */
+            font-size: 1.1em; /* [cite: 16] */
+            transition: background-color 0.3s ease; /* [cite: 16] */
+            width: 100%; /* [cite: 16] */
+            box-sizing: border-box; /* [cite: 16] */
+        }
+
+        button:hover {
+            background-color: #e05a00; /* [cite: 17] */
+        }
+
+        @media (max-width: 600px) {
+            body {
+                padding: 15px; /* [cite: 18] */
+            }
+            .container {
+                padding: 20px; /* [cite: 19] */
+                border-radius: 8px; /* [cite: 20] */
+            }
+            h1 {
+                font-size: 1.8em; /* [cite: 20] */
+                margin-bottom: 8px; /* Ajustado */
+            }
+            h2 {
+                font-size: 1.1em;
+                margin-bottom: 20px; /* [cite: 21] */
+            }
+            label {
+                font-size: 1em; /* [cite: 21] */
+            }
+            input[type="text"],
+            input[type="number"] {
+                font-size: 0.9em; /* [cite: 22] */
+                padding: 10px; /* [cite: 23] */
+            }
+            button {
+                font-size: 1em; /* [cite: 23] */
+                padding: 12px; /* [cite: 24] */
+                border-radius: 6px; /* [cite: 24] */
+            }
+        }
+
+        @media (max-width: 375px) {
+            h1 {
+                font-size: 1.6em; /* [cite: 24] */
+            }
+            h2 {
+                font-size: 1em;
+            }
+            label {
+                font-size: 0.9em; /* [cite: 25] */
+            }
+            input[type="text"],
+            input[type="number"] {
+                font-size: 0.85em; /* [cite: 26] */
+            }
+            button {
+                font-size: 0.9em; /* [cite: 27] */
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Análise de Crédito</h1>
+        <h1>Tenha o atendimento Exclusivo via WhatsApp:</h1>
+        <form id="formInteresse" onsubmit="enviarWhatsApp(event)">
+            <div class="form-group">
+                <label for="nome">Nome Completo:</label>
+                <input type="text" id="nome" name="nome" required> </div>
+
+            <div class="form-group">
+                <label for="modelo">Marca/Modelo do Veículo:</label>
+                <input type="text" id="modelo" name="modelo" placeholder="Ex: Hyundai HB20" required> </div>
+
+            <div class="form-group">
+                <label for="valor">Valor (R$):</label>
+                <input type="text" id="valor" name="valor" placeholder="Ex: 50.000,00" required> </div>
+
+            <div class="form-group">
+                <label for="entrada">Entrada Desejada (R$):</label>
+                <input type="text" id="entrada" name="entrada" placeholder="Ex: 10.000,00"> </div>
+
+            <button type="submit">Enviar para Análise - Whatsapp</button> </form>
+    </div>
+
+    <script>
+        function enviarWhatsApp(event) {
+            event.preventDefault(); /* [cite: 31] */
+
+            const nomeInput = document.getElementById('nome'); /* [cite: 32] */
+            const modeloInput = document.getElementById('modelo'); /* [cite: 32] */
+            const valorInput = document.getElementById('valor'); /* [cite: 32] */
+            const entradaInput = document.getElementById('entrada'); /* [cite: 32] */
+            const numeroTelefone = '+5511959145787'; /* [cite: 32] */
+
+            const nome = nomeInput.value.trim(); /* [cite: 33] */
+            const modelo = modeloInput.value.trim(); /* [cite: 34] */
+            const valorStr = valorInput.value.trim(); /* [cite: 34] */
+            const entradaStr = entradaInput.value.trim(); /* [cite: 34] */
+
+            let errorMessages = []; /* [cite: 34] */
+
+            if (!nome) {
+                errorMessages.push('Nome Completo é obrigatório.'); /* [cite: 35] */
+            }
+            if (!modelo) {
+                errorMessages.push('Modelo do Veículo é obrigatório.'); /* [cite: 36] */
+            }
+            if (!valorStr) { 
+                errorMessages.push('Valor (R$) é obrigatório.'); /* [cite: 37] */
+            }
+
+
+            function parseCurrencyBR(currencyString) {
+                if (!currencyString) return null; /* [cite: 38] */
+                let cleanedString = String(currencyString).replace('R$', '').trim(); /* [cite: 40] */
+                cleanedString = cleanedString.replace(/\./g, ''); /* [cite: 40] */
+                cleanedString = cleanedString.replace(',', '.'); /* [cite: 41] */
+
+                const num = parseFloat(cleanedString); /* [cite: 42] */
+                if (isNaN(num) || num < 0) { /* [cite: 43] */
+                    return NaN; /* [cite: 43] */
+                }
+                return num; /* [cite: 44] */
+            }
+
+            const valorNum = parseCurrencyBR(valorStr); /* [cite: 45] */
+            if (valorStr && isNaN(valorNum)) {
+                 errorMessages.push('Valor (R$) deve ser um número válido (Ex: 50.000,00).'); /* [cite: 46] */
+            }
+
+
+            let entradaNum = null; /* [cite: 47] */
+            if (entradaStr) { /* [cite: 48] */
+                entradaNum = parseCurrencyBR(entradaStr); /* [cite: 48] */
+                if (isNaN(entradaNum)) { /* [cite: 49] */
+                    errorMessages.push('Entrada Desejada (R$) deve ser um número válido (Ex: 10.000,00).'); /* [cite: 49] */
+                }
+            }
+            
+            if (errorMessages.length > 0) {
+                alert('Por favor, corrija os seguintes erros:\n- ' + errorMessages.join('\n- ')); /* [cite: 50] */
+                return; /* [cite: 51] */
+            }
+
+            let mensagem = `Olá, tenho interesse no seguinte veículo:\n\n`; /* [cite: 51] */
+            mensagem += `Nome Completo: ${nome}\n`; /* [cite: 52] */
+            mensagem += `Modelo do Veículo: ${modelo}\n`; /* [cite: 52] */
+            if (valorNum !== null && !isNaN(valorNum)) { 
+                mensagem += `Valor: R$${valorNum.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}\n`; /* [cite: 53] */
+            }
+            
+            if (entradaNum !== null && !isNaN(entradaNum)) { 
+                mensagem += `Entrada Desejada: R$${entradaNum.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}\n`; /* [cite: 54] */
+            } else {
+                mensagem += `Entrada Desejada: Não informada\n`; /* [cite: 55] */
+            }
+
+            const linkWhatsApp = `https://wa.me/${numeroTelefone}?text=${encodeURIComponent(mensagem)}`; /* [cite: 56] */
+            window.open(linkWhatsApp, '_blank'); /* [cite: 56] */
+        }
+    </script>
+</body>
+</html>
